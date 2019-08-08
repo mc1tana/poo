@@ -30,4 +30,13 @@ class superheroe{
     
     return self::$heroes;
   }
+  public function hydrate($val){
+       $this->name=$val['name'];
+       $this->power=$val['power'];
+       $this->identity=$val['identity'];
+       $this->universe=$val['universe'];
+
+
+
+  }
 }

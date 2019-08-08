@@ -13,6 +13,8 @@
 
 <?php 
 require_once 'SuperHeroe.php';
+require_once 'create.php';
+
 $ironMan= new SuperHeroe();
 $ironMan->name='Iron Man';
 $ironMan->power='Riche';
@@ -36,24 +38,24 @@ var_dump(SuperHeroe::all());
 
 
 //creer une connexion avec la base 
-try{
-   $db=new PDO("mysql:host=localhost;port=3306;dbname=superheroes;charset=utf8",'root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING]);
+// try{
+//    $db=new PDO("mysql:host=localhost;port=3306;dbname=superheroes;charset=utf8",'root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING]);
 
-}
-catch(Exceptio $e){
-    die('Erreur :'.$e->getmessage());
-}
+// }
+// catch(Exception $e){
+//     die('Erreur :'.$e->getmessage());
+// }
 
 
 
-$sql="INSERT INTO superheroe (`name` , `power` , `identity`, `universe` ) VALUES (:name, :power, :identity, :universe)";
+// $sql="INSERT INTO superheroe (`name` , `power` , `identity`, `universe` ) VALUES (:name, :power, :identity, :universe)";
 
-       $q = $db->prepare($sql);
-        $q->bindvalue(':name', $ironMan->name);
-        $q->bindvalue(':power', $ironMan->power);
-        $q->bindvalue(':identity', $ironMan->identity);
-        $q->bindvalue(':universe',$ironMan->universe);
+//        $q = $db->prepare($sql);
+//         $q->bindvalue(':name', $ironMan->name);
+//         $q->bindvalue(':power', $ironMan->power);
+//         $q->bindvalue(':identity', $ironMan->identity);
+//         $q->bindvalue(':universe',$ironMan->universe);
 
-        $q->execute();
+//         $q->execute();
 
 ?>
