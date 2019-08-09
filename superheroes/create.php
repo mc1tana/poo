@@ -9,70 +9,30 @@
     precedement 
  -->
 
+
+ 
  <?php 
-      require_once 'SuperHeroe.php';
-      $name=null;
-      $power=null;
-      $identity=null;
-      $universe=null;
-
-    if($_SERVER['REQUEST_METHOD']==='POST'){
-        $errors=[];
-        
-        $name=isset($_POST['name'])? trim(htmlentities($_POST['name'])) : null;
-        $power=isset($_POST['power'])? trim(htmlentities($_POST['power'])) : null;
-        $identity=isset($_POST['identity'])? trim(htmlentities($_POST['identity'])) : null;
-        $universe=isset($_POST['universe'])? trim(htmlentities($_POST['universe'])) : null;
-
-         var_dump($_POST);
-
-        if (strlen($name) <= 0) {
-            $errors['name'] = "Le name ne doit pas être vide";
-        }
-        if (strlen($power) <= 0) {
-            $errors['power'] = "Le power ne doit pas être vide";
-        }
-        if (strlen($identity) <= 0) {
-            $errors['identity'] = "Le identity ne doit pas être vide";
-        }
-
-        if(empty($errors)){
-            $heroe= new SuperHeroe();
-            $heroe->hydrate($_POST);
-            
-            try{
-                $db=new PDO("mysql:host=localhost;port=3306;dbname=superheroes;charset=utf8",'root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING]);
-             
-             }
-             catch(Exception $e){
-                 die('Erreur :'.$e->getmessage());
-             }
-             
-             
-             
-             $sql="INSERT INTO superheroe (`name` , `power` , `identity`, `universe` ) VALUES (:name, :power, :identity, :universe)";
-             
-                    $q = $db->prepare($sql);
-                     $q->bindvalue(':name', $heroe->name);
-                     $q->bindvalue(':power', $heroe->power);
-                     $q->bindvalue(':identity', $heroe->identity);
-                     $q->bindvalue(':universe',$heroe->universe);
-             
-                     $q->execute();
-        }
-    }
- ?>
- <!DOCTYPE html>
- <html lang="en">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>Document</title>
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
- </head>
- <body>
+      require 'autoload.php';
      
+     require_once 'partials/header.php';
+
+     if($_SERVER['REQUEST_METHOD']==='POST'){
+        
+         
+        
+          
+       
+             $heroe= new SuperHeroe();
+             $heroe->hydrate($_POST);
+             
+             if($heroe->save()){
+                 echo '<div class="alert alert-success">le heros a ete ajouté</div>';
+             }
+             header('location:read.php');
+         }
+     
+  ?>
+<div class="container">
  <form  method="post">
   <div class="form-group">
     <label for="name">name</label>
@@ -100,9 +60,6 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
-></script>
- </body>
- </html>
+</div>
+     
+<?php require_once 'partials/header.php'; ?>

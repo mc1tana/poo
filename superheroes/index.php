@@ -7,13 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <a href="read.php">list</a>
 </body>
 </html>
 
 <?php 
 require_once 'SuperHeroe.php';
 require_once 'create.php';
+
 
 $ironMan= new SuperHeroe();
 $ironMan->name='Iron Man';
@@ -58,4 +59,4 @@ var_dump(SuperHeroe::all());
 
 //         $q->execute();
 
-?>
+?> 
