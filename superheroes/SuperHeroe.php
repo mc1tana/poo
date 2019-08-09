@@ -37,6 +37,7 @@ class superheroe{
 
 
   public function hydrate($data){
+    
        $this->name=trim($data['name']);
        $this->power=trim($data['power']);
        $this->identity=trim($data['identity']);
@@ -63,6 +64,25 @@ class superheroe{
          return $q->execute();
 
  }
-
-
+ public function update($id)
+ {
+  
+ 
+  
+ 
+ $q=DataBase::get()->prepare("UPDATE superheroe SET `name`=:name, `power`=:power, `identity`=:identity, `universe`=:universe WHERE `id`=:id");
+ 
+ $query = Database::get()->prepare('UPDATE `superheroe` SET `name` = :name, `power` = :power, `identity` = :identity, `universe` = :universe WHERE id = :id');
+ // On associe les données récupérées à la requête
+ $query->bindValue(':name', $this->name);
+ $query->bindValue(':power', $this->power);
+ $query->bindValue(':identity', $this->identity);
+ $query->bindValue(':universe', $this->universe);
+ $query->bindValue(':id', $id);
+ return $query->execute(); // executer la requête préparée
 }
+}
+
+ 
+
+

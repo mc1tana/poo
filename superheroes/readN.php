@@ -2,8 +2,6 @@
       require_once 'autoload.php';
       
 require_once 'partials/header.php';
-$q=DataBase::get()->query("SELECT * FROM `superheroe` ");
-
 
     // Préparation de la requete
     
@@ -14,7 +12,7 @@ $q=DataBase::get()->query("SELECT * FROM `superheroe` ");
     // Resultats sous forme de tableau associatif
     // $film = $q->fetch(PDO::FETCH_ASSOC); // $film['title']
     // Résultat sous forme d'objet stdClass 
-    $heroes = $q->fetchAll(PDO::FETCH_OBJ); // $film->title
+    $heroes =Naughty::findall(); // $film->title
 ?>
  <div class="container mt-5">
      <div class="card shadow">
@@ -24,7 +22,7 @@ $q=DataBase::get()->query("SELECT * FROM `superheroe` ");
       <th scope="col">id</th>
       <th>photo</th>
       <th scope="col">name</th>
-      <th scope="col">power</th>
+      <th scope="col">hobby</th>
       <th scope="col">identity</th>
       <th scope="col">universe</th>
       <th scope="col" >action</th>
@@ -36,13 +34,13 @@ $q=DataBase::get()->query("SELECT * FROM `superheroe` ");
       <td scope="row"><?= $heroe->id ?></td>
       <td><img src="" ></td>
       <td><?= $heroe->name ?></td>
-      <td><?= $heroe->power ?></td>
+      <td><?= $heroe->hobby ?></td>
       <td><?= $heroe->identity ?></td>
       <td><?= $heroe->universe ?></td>
       <td>
        <a href="" class="btn btn-secondary">reveler</a>
-      <a href="update.php?id=<?= $heroe->id ?>" class="btn btn-primary">modifier</a>
-     <a href="delete.php?id=<?= $heroe->id ?>" class="btn btn-danger">suprimer</a>
+      <a href="updateN.php?id=<?= $heroe->id ?>" class="btn btn-primary">modifier</a>
+     <a href="deleteN.php?id=<?= $heroe->id ?>" class="btn btn-danger">suprimer</a>
       </td>
 
     </tr>

@@ -1,26 +1,15 @@
-
 <?php 
 require_once 'autoload.php';
 
 include_once 'partials/header.php';
 $id = isset($_GET['id']) ? trim($_GET['id']) : null;
 
-
-$q=DataBase::get()->prepare ("SELECT * FROM `superheroe` WHERE `id`=:id ");
-    // Préparation de la requete
-   
-    $q->bindValue(':id',$id);
-    // Execution de la requete
-    $q->execute();
-    $q->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, superheroe::class);
-    $heroes = $q->fetch(); // $film->title
-
+$heroes=Naughty::find($id);
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
  
 
   
-
 $heroes->hydrate($_POST);
 if($heroes->update($id)){
   echo '<div class="alert alert-success">le heore est bien modifié</div>';
@@ -28,7 +17,7 @@ if($heroes->update($id)){
 
 
 
-header('location:read.php');
+header('location:readN.php');
 
 }
 
@@ -54,8 +43,8 @@ header('location:read.php');
     
   </div>
   <div class="form-group">
-    <label for="power"> power </label>
-    <input type="text" class="form-control" name="power"  value="<?= $heroes->power ?>">
+    <label for="hobby"> hobby </label>
+    <input type="text" class="form-control" name="hobby"  value="<?= $heroes->hobby ?>">
     
   </div>
   
